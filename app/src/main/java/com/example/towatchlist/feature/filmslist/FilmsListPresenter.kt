@@ -10,7 +10,12 @@ class FilmsListPresenter(
 
     override fun searchFilm(query: String) {
         launch {
-            view?.showResultsOfSearch((interactor.searchFilm(query) as Result.Success).data)
+            val result = interactor.searchFilm(query)
+            if (result is Result.Success) {
+                view?.showResultsOfSearch(result.data.results.firstOrNull()?.title ?: "No Title for first result")
+            } else if (result is Result.Error){
+                view?.showResultsOfSearch(result.exception.toString())
+            }
         }
     }
 }
