@@ -6,6 +6,6 @@ import org.koin.dsl.module
 
 object PresenterModule {
     val presenterModule = module {
-        factory<FilmsListContract.Presenter> { (_: FilmsListContract.View) -> FilmsListPresenter(get()) }
+        factory { FilmsListPresenter(get()) as FilmsListContract.Presenter }
     }
 }
