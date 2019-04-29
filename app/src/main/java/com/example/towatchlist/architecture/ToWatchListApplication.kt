@@ -1,32 +1,19 @@
 package com.example.towatchlist.architecture
 
 import android.app.Application
-import com.example.towatchlist.architecture.di.component.ApplicationComponent
-import com.example.towatchlist.architecture.di.component.DaggerApplicationComponent
-import com.example.towatchlist.architecture.di.module.ApplicationModule
+import com.example.towatchlist.architecture.di.NetworkModule.networkModule
+import com.example.towatchlist.architecture.di.PresenterModule.presenterModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 class ToWatchListApplication : Application() {
-    lateinit var component: ApplicationComponent
-
     override fun onCreate() {
         super.onCreate()
 
-        instance = this
-        setup()
-    }
+        startKoin {
+            androidContext(this@ToWatchListApplication)
 
-    private fun setup() {
-        component = DaggerApplicationComponent.builder()
-            .applicationModule(ApplicationModule(this))
-            .build()
-        component.inject(this)
-    }
-
-    fun getApplicationComponent(): ApplicationComponent {
-        return component
-    }
-
-    companion object {
-        lateinit var instance: ToWatchListApplication private set
+            modules(presenterModule, networkModule)
+        }
     }
 }

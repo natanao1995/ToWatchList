@@ -1,20 +1,22 @@
-package com.example.towatchlist.architecture.di.module
+package com.example.towatchlist.architecture.di
 
-import dagger.Module
-import dagger.Provides
+import com.example.towatchlist.model.remote.TMDbService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
-@Module
-class NetworkModule {
-    @Provides
-    @Singleton
-    fun provideRetrofit(): Retrofit {
+object NetworkModule {
+    val networkModule = module {
+        single { createOkHttpClient() }
+        single { createRetrofitInstance(get()) }
+        single { createTMDbService(get()) }
+    }
+
+    private fun createOkHttpClient(): OkHttpClient {
         val apiKeyInterceptor = object : Interceptor {
             override fun intercept(chain: Interceptor.Chain): Response {
                 val originalRequest = chain.request()
@@ -35,15 +37,21 @@ class NetworkModule {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
-        val okHttpClient = OkHttpClient.Builder()
+        return OkHttpClient.Builder()
             .addInterceptor(apiKeyInterceptor)
             .addInterceptor(loggingInterceptor)
             .build()
+    }
 
+    private fun createRetrofitInstance(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
+    }
+
+    private fun createTMDbService(retrofit: Retrofit): TMDbService {
+        return retrofit.create(TMDbService::class.java)
     }
 }
