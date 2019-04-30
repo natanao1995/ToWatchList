@@ -2,6 +2,7 @@ package com.example.towatchlist.model.remote.entity
 
 import com.google.gson.annotations.SerializedName
 
+/** https://developers.themoviedb.org/3/search/search-movies */
 data class SearchMovieResponseEntity(
     val page: Int,
     val results: List<SearchMovieResponseResult>,

@@ -14,7 +14,7 @@ class FilmsListActivity : AppCompatActivity(), FilmsListContract.View {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_films_list)
 
-        presenter.attachView(this)
+        presenter.attachView(this, lifecycle)
 
         presenter.searchFilm("Harry Potter")
     }
