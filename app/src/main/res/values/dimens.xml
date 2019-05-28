@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="itemFindMoviesScoreSize">40dp</dimen>
+    <dimen name="itemFindMoviesScoreTextSize">18sp</dimen>
+    <dimen name="itemFindMovieBaseElevation">4dp</dimen>
+    <dimen name="itemFindMoviePosterElevation">8dp</dimen>
+</resources>

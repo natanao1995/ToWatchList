@@ -1,5 +1,7 @@
 package com.example.towatchlist.architecture.di
 
+import com.example.towatchlist.Constants.API_KEY_TMDB
+import com.example.towatchlist.Constants.BASE_URL_TMDB
 import com.example.towatchlist.model.remote.TMDbService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
@@ -24,7 +26,7 @@ object NetworkModule {
                 val originalUrl = originalRequest.url()
 
                 val url = originalUrl.newBuilder()
-                    .addQueryParameter("api_key", "2564e6c3603b3fe852685889227b91ab")
+                    .addQueryParameter("api_key", API_KEY_TMDB)
                     .build()
 
                 val request = originalRequest.newBuilder()
@@ -46,7 +48,7 @@ object NetworkModule {
 
     private fun createRetrofitInstance(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
+            .baseUrl(BASE_URL_TMDB)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(okHttpClient)

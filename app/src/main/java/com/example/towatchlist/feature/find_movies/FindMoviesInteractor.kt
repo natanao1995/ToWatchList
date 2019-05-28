@@ -1,4 +1,4 @@
-package com.example.towatchlist.feature.filmslist
+package com.example.towatchlist.feature.find_movies
 
 import com.example.towatchlist.architecture.base.Result
 import com.example.towatchlist.model.remote.TMDbService
@@ -7,10 +7,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 
-class FilmsListInteractor(
+class FindMoviesInteractor(
     private val tmDbService: TMDbService
-) : IFilmsListInteractor {
-    override suspend fun searchFilm(query: String)
+) : IFindMoviesInteractor {
+    override suspend fun searchMovie(query: String)
             : Result<SearchMovieResponseEntity> = withContext(Dispatchers.IO) {
         return@withContext try {
             Result.Success(tmDbService.searchMovieAsync(query).await())

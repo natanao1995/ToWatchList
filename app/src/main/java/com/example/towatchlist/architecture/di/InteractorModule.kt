@@ -1,11 +1,11 @@
 package com.example.towatchlist.architecture.di
 
-import com.example.towatchlist.feature.filmslist.FilmsListInteractor
-import com.example.towatchlist.feature.filmslist.IFilmsListInteractor
+import com.example.towatchlist.feature.find_movies.FindMoviesInteractor
+import com.example.towatchlist.feature.find_movies.IFindMoviesInteractor
 import org.koin.dsl.module
 
 object InteractorModule {
     val interactorModule = module {
-        factory { FilmsListInteractor(get()) as IFilmsListInteractor }
+        factory { FindMoviesInteractor(get()) as IFindMoviesInteractor }
     }
 }

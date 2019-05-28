@@ -8,4 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ItemFindMoviesScoreStyle">
+        <item name="android:layout_width">@dimen/itemFindMoviesScoreSize</item>
+        <item name="android:layout_height">@dimen/itemFindMoviesScoreSize</item>
+        <item name="android:background">@drawable/item_find_movies_score_bg</item>
+        <item name="android:textColor">@color/itemFindMoviesScoreTextColor</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/itemFindMoviesScoreTextSize</item>
+    </style>
+
 </resources>

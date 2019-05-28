@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:ignore="ContentDescription,RtlHardcoded"
+        tools:background="#ddd">
+
+    <View
+            android:id="@+id/viewBg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="@dimen/itemFindMovieBaseElevation"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/item_find_movies_bg"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="24dp"/>
+
+    <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:maxLines="2"
+            android:elevation="@dimen/itemFindMovieBaseElevation"
+            app:layout_constraintTop_toTopOf="@id/viewBg"
+            app:layout_constraintLeft_toRightOf="@id/textScore"
+            app:layout_constraintRight_toRightOf="@id/viewBg"
+            tools:text="Harry Potter and the Prisoner of Azkaban (2014)"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"/>
+
+    <TextView
+            android:id="@+id/textDescription"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="@dimen/itemFindMovieBaseElevation"
+            android:maxLines="6"
+            android:ellipsize="end"
+            tools:text="It's Harry's third year at Hogwarts; not only does he have a new 'Defense Against the Dark Arts' teacher, but there is also trouble brewing. Convicted murderer Sirius Black has escaped the Wizards' Prison and is coming after Harry. Convicted murderer Sirius Black has escaped the Wizards' Prison and is coming after Harry."
+            app:layout_constraintLeft_toRightOf="@id/textScore"
+            app:layout_constraintRight_toRightOf="@id/viewBg"
+            app:layout_constraintBottom_toBottomOf="@id/viewBg"
+            app:layout_constraintTop_toBottomOf="@id/textTitle"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"/>
+
+    <ImageView
+            android:id="@+id/imagePoster"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/image_temp_poster"
+            android:scaleType="centerCrop"
+            android:background="@drawable/all_drop_shadow_bg"
+            android:elevation="@dimen/itemFindMoviePosterElevation"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="h,3:2"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"/>
+
+    <TextView
+            android:id="@+id/textScore"
+            tools:text="8.7"
+            android:elevation="@dimen/itemFindMoviePosterElevation"
+            app:layout_constraintLeft_toRightOf="@id/imagePoster"
+            app:layout_constraintRight_toRightOf="@id/imagePoster"
+            app:layout_constraintBottom_toBottomOf="@id/imagePoster"
+            android:layout_marginBottom="4dp"
+            style="@style/ItemFindMoviesScoreStyle"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
