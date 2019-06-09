@@ -1,6 +1,7 @@
 package com.example.towatchlist.architecture
 
 import android.app.Application
+import com.example.towatchlist.architecture.di.DatabaseModule.databaseModule
 import com.example.towatchlist.architecture.di.InteractorModule.interactorModule
 import com.example.towatchlist.architecture.di.NetworkModule.networkModule
 import com.example.towatchlist.architecture.di.PresenterModule.presenterModule
@@ -14,7 +15,11 @@ class ToWatchListApplication : Application() {
         startKoin {
             androidContext(this@ToWatchListApplication)
 
-            modules(presenterModule, interactorModule, networkModule)
+            modules(
+                presenterModule,
+                interactorModule,
+                networkModule,
+                databaseModule)
         }
     }
 }
