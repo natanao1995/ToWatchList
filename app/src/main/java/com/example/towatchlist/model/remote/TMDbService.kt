@@ -7,5 +7,8 @@ import retrofit2.http.Query
 
 interface TMDbService {
     @GET("search/movie")
-    suspend fun searchMovieAsync(@Query("query") query: String): Response<SearchMovieResponseEntity>
+    suspend fun searchMovieAsync(
+        @Query("query") query: String,
+        @Query("page") page: Int? = null
+    ): Response<SearchMovieResponseEntity>
 }

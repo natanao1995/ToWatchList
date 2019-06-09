@@ -1,15 +1,19 @@
 package com.example.towatchlist.feature.find_movies
 
-import com.example.towatchlist.architecture.base.BaseContract
+import com.example.towatchlist.architecture.base.BasePresenter
+import com.example.towatchlist.architecture.base.MvpView
 import com.example.towatchlist.model.remote.entity.SearchMovieResponseEntity
 
 interface FindMoviesContract {
-    interface Presenter : BaseContract.Presenter<FindMoviesContract.View> {
-        fun searchMovie(query: String)
+    abstract class Presenter : BasePresenter<View>() {
+        abstract fun searchMovies(query: String)
+        abstract fun appendSearchResult()
+        abstract fun restoreSearchResults()
     }
 
-    interface View : BaseContract.View {
+    interface View : MvpView {
         fun showSearchResults(result: List<SearchMovieResponseEntity.SearchMovieResponseResult>)
+        fun appendSearchResults(result: List<SearchMovieResponseEntity.SearchMovieResponseResult>)
         fun showSearchError()
     }
 }

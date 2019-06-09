@@ -27,10 +27,12 @@ class FindMoviesRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         val movieHolder = holder as FindMoviesViewHolder
 
         movieHolder.imagePoster.setImageDrawable(null)
-        Glide.with(holder.itemView)
-            .load("$BASE_URL_TMDB_IMAGE${movie.posterPath}")
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(movieHolder.imagePoster)
+        movie.posterPath?.let {
+            Glide.with(holder.itemView)
+                .load("$BASE_URL_TMDB_IMAGE$it")
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(movieHolder.imagePoster)
+        }
 
         movieHolder.textTitle.text = movie.title
         movieHolder.textDescription.text = movie.overview
@@ -45,6 +47,12 @@ class FindMoviesRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
+    }
+
+    fun appendItems(items: List<SearchMovieResponseEntity.SearchMovieResponseResult>) {
+        val positionStart = itemCount
+        this.items.addAll(items)
+        notifyItemRangeInserted(positionStart, items.size)
     }
 
     fun clearItems() {

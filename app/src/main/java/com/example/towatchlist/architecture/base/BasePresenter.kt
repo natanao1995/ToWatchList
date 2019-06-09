@@ -4,23 +4,16 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.*
 
-open class BasePresenter<T : BaseContract.View>
-    : BaseContract.Presenter<T>, CoroutineScope, ViewModel(), LifecycleObserver {
-    var job: Job = Job()
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+abstract class BasePresenter<T : MvpView> : ViewModel(), LifecycleObserver, CoroutineScope by MainScope() {
 
     protected var view: T? = null
         private set
 
     private var viewLifecycle: Lifecycle? = null
 
-    override fun attachView(view: T, viewLifecycle: Lifecycle) {
+    fun attachView(view: T, viewLifecycle: Lifecycle) {
         this.view = view
         this.viewLifecycle = viewLifecycle
 
@@ -31,7 +24,10 @@ open class BasePresenter<T : BaseContract.View>
     private fun onViewDestroyed() {
         view = null
         viewLifecycle = null
+    }
 
-        job.cancel()
+    override fun onCleared() {
+        super.onCleared()
+        cancel()
     }
 }
