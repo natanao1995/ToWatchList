@@ -4,9 +4,7 @@ import com.example.towatchlist.architecture.base.Result
 import com.example.towatchlist.model.remote.entity.SearchMovieResponseEntity
 import kotlinx.coroutines.launch
 
-class FindMoviesPresenter(
-    private val interactorFind: IFindMoviesInteractor
-) : FindMoviesContract.Presenter() {
+class FindMoviesPresenter(private val findMoviesInteractor: IFindMoviesInteractor) : FindMoviesContract.Presenter() {
     private var searchQuery: String? = null
     private var searchPages = 1
     private var currentPage = 1
@@ -22,7 +20,7 @@ class FindMoviesPresenter(
 
             resetSearchParameters(query)
 
-            val result = interactorFind.searchMovie(query)
+            val result = findMoviesInteractor.searchMovie(query)
             if (result is Result.Success) {
                 searchPages = result.data.totalPages
                 searchResults.clear()
@@ -41,7 +39,7 @@ class FindMoviesPresenter(
             searchQuery?.also { searchQuery ->
                 currentPage++
 
-                val result = interactorFind.searchMovie(searchQuery, currentPage)
+                val result = findMoviesInteractor.searchMovie(searchQuery, currentPage)
                 if (result is Result.Success) {
                     searchResults.addAll(result.data.results)
                     view?.appendSearchResults(result.data.results)
