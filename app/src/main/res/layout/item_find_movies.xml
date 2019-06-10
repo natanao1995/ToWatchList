@@ -61,7 +61,7 @@
             android:id="@+id/imagePoster"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/image_temp_poster"
+            tools:src="@drawable/image_temp_poster"
             android:scaleType="centerCrop"
             android:background="@drawable/all_drop_shadow_bg"
             android:elevation="@dimen/itemFindMoviePosterElevation"

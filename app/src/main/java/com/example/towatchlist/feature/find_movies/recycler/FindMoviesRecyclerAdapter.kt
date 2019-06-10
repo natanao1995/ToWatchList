@@ -3,6 +3,8 @@ package com.example.towatchlist.feature.find_movies.recycler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -15,6 +17,12 @@ import java.util.*
 
 class FindMoviesRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    public var onClickListener: ((
+        movie: SearchMovieResponseEntity.SearchMovieResponseResult,
+        imagePoster: ImageView,
+        viewBg: View
+    ) -> Unit)? = null
+
     private var items: ArrayList<SearchMovieResponseEntity.SearchMovieResponseResult> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -25,6 +33,9 @@ class FindMoviesRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val movie = items[position]
         val movieHolder = holder as FindMoviesViewHolder
+
+        movieHolder.imagePoster.transitionName = "imagePoster_${movie.id}"
+        movieHolder.viewBg.transitionName = "viewBg_${movie.id}"
 
         movieHolder.imagePoster.setImageDrawable(null)
         movie.posterPath?.let {
@@ -37,6 +48,10 @@ class FindMoviesRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         movieHolder.textTitle.text = movie.title
         movieHolder.textDescription.text = movie.overview
         movieHolder.textScore.text = movie.voteAverage.toString()
+
+        movieHolder.itemView.setOnClickListener {
+            onClickListener?.invoke(movie, movieHolder.imagePoster, movieHolder.viewBg)
+        }
     }
 
     override fun getItemCount(): Int {

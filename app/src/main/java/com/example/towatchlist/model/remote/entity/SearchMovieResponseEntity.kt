@@ -1,6 +1,8 @@
 package com.example.towatchlist.model.remote.entity
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 /** https://developers.themoviedb.org/3/search/search-movies */
 data class SearchMovieResponseEntity(
@@ -11,6 +13,7 @@ data class SearchMovieResponseEntity(
     @SerializedName("total_pages")
     val totalPages: Int
 ) {
+    @Parcelize
     data class SearchMovieResponseResult(
         @SerializedName("poster_path")
         val posterPath: String?,
@@ -34,5 +37,5 @@ data class SearchMovieResponseEntity(
         val video: Boolean,
         @SerializedName("vote_average")
         val voteAverage: Double
-    )
+    ) : Parcelable
 }
