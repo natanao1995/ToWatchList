@@ -10,7 +10,7 @@ import com.google.gson.Gson
 class FindMoviesInteractor(
     private val tmDbService: TMDbService,
     private val savedMovieDao: SavedMovieDao
-) : IFindMoviesInteractor {
+) : FindMoviesContract.Interactor {
 
      override suspend fun searchMovie(query: String, page: Int?): Result<SearchMovieResponseEntity> {
         try {

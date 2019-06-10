@@ -2,6 +2,7 @@ package com.example.towatchlist.feature.find_movies
 
 import com.example.towatchlist.architecture.base.BasePresenter
 import com.example.towatchlist.architecture.base.MvpView
+import com.example.towatchlist.architecture.base.Result
 import com.example.towatchlist.model.remote.entity.SearchMovieResponseEntity
 
 interface FindMoviesContract {
@@ -15,5 +16,9 @@ interface FindMoviesContract {
         fun showSearchResults(result: List<SearchMovieResponseEntity.SearchMovieResponseResult>)
         fun appendSearchResults(result: List<SearchMovieResponseEntity.SearchMovieResponseResult>)
         fun showSearchError()
+    }
+
+    interface Interactor {
+        suspend fun searchMovie(query: String, page: Int? = null): Result<SearchMovieResponseEntity>
     }
 }

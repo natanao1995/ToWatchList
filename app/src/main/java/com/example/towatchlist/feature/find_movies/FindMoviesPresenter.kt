@@ -4,7 +4,7 @@ import com.example.towatchlist.architecture.base.Result
 import com.example.towatchlist.model.remote.entity.SearchMovieResponseEntity
 import kotlinx.coroutines.launch
 
-class FindMoviesPresenter(private val findMoviesInteractor: IFindMoviesInteractor) : FindMoviesContract.Presenter() {
+class FindMoviesPresenter(private val findMoviesInteractor: FindMoviesContract.Interactor) : FindMoviesContract.Presenter() {
     private var searchQuery: String? = null
     private var searchPages = 1
     private var currentPage = 1

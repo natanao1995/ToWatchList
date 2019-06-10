@@ -1,5 +1,6 @@
 package com.example.towatchlist.feature.find_movies
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import com.example.towatchlist.feature.find_movies.recycler.FindMoviesRecyclerAd
 import com.example.towatchlist.model.remote.entity.SearchMovieResponseEntity
 import kotlinx.android.synthetic.main.activity_find_movies.*
 import com.example.towatchlist.architecture.base.BaseActivity
+import com.example.towatchlist.feature.found_movie_details.FoundMovieDetailsActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class FindMoviesActivity : BaseActivity(), FindMoviesContract.View {
@@ -32,6 +34,10 @@ class FindMoviesActivity : BaseActivity(), FindMoviesContract.View {
         buttonSearch.setOnClickListener {
             presenter.searchMovies(editTextSearch.text.toString())
             hideKeyboard()
+        }
+
+        buttonOpenNewActivity.setOnClickListener {
+            startActivity(Intent(this, FoundMovieDetailsActivity::class.java))
         }
     }
 
