@@ -3,7 +3,6 @@ package com.example.towatchlist.architecture.di
 import com.example.towatchlist.Constants.API_KEY_TMDB
 import com.example.towatchlist.Constants.BASE_URL_TMDB
 import com.example.towatchlist.model.remote.TMDbService
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response
@@ -11,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 object NetworkModule {
     val networkModule = module {
@@ -43,6 +43,8 @@ object NetworkModule {
         return OkHttpClient.Builder()
             .addInterceptor(apiKeyInterceptor)
             .addInterceptor(loggingInterceptor)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
             .build()
     }
 
@@ -50,7 +52,6 @@ object NetworkModule {
         return Retrofit.Builder()
             .baseUrl(BASE_URL_TMDB)
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(okHttpClient)
             .build()
     }

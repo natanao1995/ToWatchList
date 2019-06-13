@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -17,10 +18,12 @@ import java.util.*
 
 class FindMoviesRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    public var onClickListener: ((
+    var onClickListener: ((
         movie: SearchMovieResponseEntity.SearchMovieResponseResult,
         imagePoster: ImageView,
-        viewBg: View
+        viewBg: View,
+        textTitle: TextView,
+        textDescription: TextView
     ) -> Unit)? = null
 
     private var items: ArrayList<SearchMovieResponseEntity.SearchMovieResponseResult> = ArrayList()
@@ -36,6 +39,8 @@ class FindMoviesRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
 
         movieHolder.imagePoster.transitionName = "imagePoster_${movie.id}"
         movieHolder.viewBg.transitionName = "viewBg_${movie.id}"
+        movieHolder.textTitle.transitionName = "textTitle_${movie.id}"
+        movieHolder.textDescription.transitionName = "textDescription_${movie.id}"
 
         movieHolder.imagePoster.setImageDrawable(null)
         movie.posterPath?.let {
@@ -50,7 +55,12 @@ class FindMoviesRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         movieHolder.textScore.text = movie.voteAverage.toString()
 
         movieHolder.itemView.setOnClickListener {
-            onClickListener?.invoke(movie, movieHolder.imagePoster, movieHolder.viewBg)
+            onClickListener?.invoke(
+                movie,
+                movieHolder.imagePoster,
+                movieHolder.viewBg,
+                movieHolder.textTitle,
+                movieHolder.textDescription)
         }
     }
 
