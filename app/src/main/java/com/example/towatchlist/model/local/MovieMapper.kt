@@ -1,9 +1,9 @@
 package com.example.towatchlist.model.local
 
 import com.example.towatchlist.model.local.entity.SavedMovie
-import com.example.towatchlist.model.remote.entity.SearchMovieResponseEntity
+import com.example.towatchlist.model.remote.entity.MovieListResultObject
 
-fun SearchMovieResponseEntity.SearchMovieResponseResult.toDatabaseEntity(): SavedMovie {
+fun MovieListResultObject.SearchMovieResponseResult.toDatabaseEntity(): SavedMovie {
     return SavedMovie(
         id,
         title,

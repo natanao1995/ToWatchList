@@ -9,7 +9,7 @@ import androidx.core.util.Pair
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.towatchlist.R
 import com.example.towatchlist.feature.find_movies.recycler.FindMoviesRecyclerAdapter
-import com.example.towatchlist.model.remote.entity.SearchMovieResponseEntity
+import com.example.towatchlist.model.remote.entity.MovieListResultObject
 import kotlinx.android.synthetic.main.activity_find_movies.*
 import com.example.towatchlist.architecture.base.BaseActivity
 import com.example.towatchlist.feature.found_movie_details.FoundMovieDetailsActivity
@@ -64,11 +64,11 @@ class FindMoviesActivity : BaseActivity(), FindMoviesContract.View {
         }
     }
 
-    override fun showSearchResults(result: List<SearchMovieResponseEntity.SearchMovieResponseResult>) {
+    override fun showSearchResults(result: List<MovieListResultObject.SearchMovieResponseResult>) {
         adapter.setItems(result)
     }
 
-    override fun appendSearchResults(result: List<SearchMovieResponseEntity.SearchMovieResponseResult>) {
+    override fun appendSearchResults(result: List<MovieListResultObject.SearchMovieResponseResult>) {
         adapter.appendItems(result)
     }
 

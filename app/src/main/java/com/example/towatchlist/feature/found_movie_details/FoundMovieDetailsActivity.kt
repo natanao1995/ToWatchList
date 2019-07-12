@@ -3,7 +3,7 @@ package com.example.towatchlist.feature.found_movie_details
 import android.os.Bundle
 import com.example.towatchlist.R
 import com.example.towatchlist.architecture.base.BaseActivity
-import com.example.towatchlist.model.remote.entity.SearchMovieResponseEntity
+import com.example.towatchlist.model.remote.entity.MovieListResultObject
 import org.koin.android.viewmodel.ext.android.viewModel
 import kotlinx.android.synthetic.main.activity_found_movie_details.*
 import com.bumptech.glide.request.RequestListener
@@ -34,7 +34,7 @@ class FoundMovieDetailsActivity : BaseActivity(), FoundMovieDetailsContract.View
         supportPostponeEnterTransition()
 
         val extras = intent.extras
-        val movie = extras?.getParcelable<SearchMovieResponseEntity.SearchMovieResponseResult>(EXTRA_MOVIE_ITEM)
+        val movie = extras?.getParcelable<MovieListResultObject.SearchMovieResponseResult>(EXTRA_MOVIE_ITEM)
 
         imagePoster.transitionName = extras?.getString(EXTRA_TRANSITION_NAME_IMAGE_POSTER)
         viewBg.transitionName = extras?.getString(EXTRA_TRANSITION_NAME_VIEW_BG)

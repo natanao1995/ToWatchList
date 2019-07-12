@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 /** https://developers.themoviedb.org/3/search/search-movies */
-data class SearchMovieResponseEntity(
+data class MovieListResultObject(
     val page: Int,
     val results: List<SearchMovieResponseResult>,
     @SerializedName("total_results")

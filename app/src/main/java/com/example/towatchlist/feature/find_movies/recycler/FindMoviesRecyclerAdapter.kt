@@ -5,13 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.example.towatchlist.Constants.BASE_URL_TMDB_IMAGE
 import com.example.towatchlist.R
-import com.example.towatchlist.model.remote.entity.SearchMovieResponseEntity
+import com.example.towatchlist.model.remote.entity.MovieListResultObject
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_find_movies.*
 import java.util.*
@@ -19,14 +18,14 @@ import java.util.*
 class FindMoviesRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var onClickListener: ((
-        movie: SearchMovieResponseEntity.SearchMovieResponseResult,
+        movie: MovieListResultObject.SearchMovieResponseResult,
         imagePoster: ImageView,
         viewBg: View,
         textTitle: TextView,
         textDescription: TextView
     ) -> Unit)? = null
 
-    private var items: ArrayList<SearchMovieResponseEntity.SearchMovieResponseResult> = ArrayList()
+    private var items: ArrayList<MovieListResultObject.SearchMovieResponseResult> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_find_movies, parent, false)
@@ -68,13 +67,13 @@ class FindMoviesRecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         return items.size
     }
 
-    fun setItems(items: List<SearchMovieResponseEntity.SearchMovieResponseResult>) {
+    fun setItems(items: List<MovieListResultObject.SearchMovieResponseResult>) {
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged()
     }
 
-    fun appendItems(items: List<SearchMovieResponseEntity.SearchMovieResponseResult>) {
+    fun appendItems(items: List<MovieListResultObject.SearchMovieResponseResult>) {
         val positionStart = itemCount
         this.items.addAll(items)
         notifyItemRangeInserted(positionStart, items.size)
