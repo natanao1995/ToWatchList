@@ -4,4 +4,8 @@
     <dimen name="itemFindMoviesScoreTextSize">18sp</dimen>
     <dimen name="itemFindMovieBaseElevation">4dp</dimen>
     <dimen name="itemFindMoviePosterElevation">8dp</dimen>
+
+    <dimen name="materialStatusBarHeight">24dp</dimen>
+    <dimen name="materialIconSize">48dp</dimen>
+    <dimen name="materialIconPadding">12dp</dimen>
 </resources>

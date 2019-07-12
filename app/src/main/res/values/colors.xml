@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#37c5b5</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#fba037</color>
+    <color name="colorPrimary">#b7a3a3</color>
+    <color name="colorPrimaryDark">#3d1d2d</color>
+    <color name="colorAccent">#ff576d</color>
     <color name="colorWhite">#fff</color>
-    <color name="itemFindMoviesScoreTextColor">#fff</color>
 </resources>

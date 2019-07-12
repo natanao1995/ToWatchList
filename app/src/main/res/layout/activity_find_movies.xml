@@ -5,25 +5,59 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".feature.find_movies.FindMoviesActivity">
+        tools:context=".feature.find_movies.FindMoviesActivity"
+        tools:ignore="ContentDescription">
 
-    <EditText
-            android:id="@+id/editTextSearch"
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintToolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/buttonSearch"
-            app:layout_constraintBottom_toBottomOf="@id/buttonSearch"
+            android:background="@color/colorPrimary"
+            android:elevation="@dimen/itemFindMovieBaseElevation"
+            android:padding="8dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/buttonSearch"/>
-
-    <Button
-            android:id="@+id/buttonSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Search"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toRightOf="@id/editTextSearch"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+                android:id="@+id/imageLogo"
+                android:layout_width="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_height="100dp"
+                android:src="@drawable/img_logo"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+                android:id="@+id/viewGuideline"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                app:layout_constraintHorizontal_bias="0.6"
+                app:layout_constraintLeft_toLeftOf="@id/imageLogo"
+                app:layout_constraintRight_toRightOf="@id/imageLogo"
+                app:layout_constraintTop_toTopOf="@id/imageLogo"
+                app:layout_constraintBottom_toBottomOf="@id/imageLogo"/>
+
+        <EditText
+                android:id="@+id/editTextSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="Search"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintTop_toTopOf="@id/buttonSearch"
+                app:layout_constraintBottom_toBottomOf="@id/imageLogo"
+                app:layout_constraintLeft_toRightOf="@id/viewGuideline"
+                app:layout_constraintRight_toLeftOf="@id/buttonSearch"/>
+
+        <ImageView
+                android:id="@+id/buttonSearch"
+                android:layout_width="@dimen/materialIconSize"
+                android:layout_height="@dimen/materialIconSize"
+                android:padding="@dimen/materialIconPadding"
+                android:src="@drawable/ic_search"
+                app:layout_constraintBottom_toBottomOf="@id/imageLogo"
+                app:layout_constraintRight_toRightOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerFindMovies"
@@ -32,7 +66,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buttonSearch"/>
+            app:layout_constraintTop_toBottomOf="@id/constraintToolbar"/>
 
     <Button
             android:id="@+id/buttonNextPage"

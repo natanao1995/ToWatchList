@@ -1,8 +1,5 @@
 <resources>
-
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -12,9 +9,8 @@
         <item name="android:layout_width">@dimen/itemFindMoviesScoreSize</item>
         <item name="android:layout_height">@dimen/itemFindMoviesScoreSize</item>
         <item name="android:background">@drawable/item_find_movies_score_bg</item>
-        <item name="android:textColor">@color/itemFindMoviesScoreTextColor</item>
+        <item name="android:textColor">@color/colorWhite</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/itemFindMoviesScoreTextSize</item>
     </style>
-
 </resources>
