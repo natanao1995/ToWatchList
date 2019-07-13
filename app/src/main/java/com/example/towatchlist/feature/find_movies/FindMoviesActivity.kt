@@ -6,10 +6,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.towatchlist.R
 import com.example.towatchlist.feature.find_movies.recycler.FindMoviesRecyclerAdapter
-import com.example.towatchlist.model.remote.entity.MovieListResultObject
 import kotlinx.android.synthetic.main.activity_find_movies.*
 import com.example.towatchlist.architecture.base.BaseActivity
 import com.example.towatchlist.feature.found_movie_details.FoundMovieDetailsActivity
@@ -20,27 +20,29 @@ import com.example.towatchlist.feature.found_movie_details.FoundMovieDetailsActi
 import com.example.towatchlist.feature.found_movie_details.FoundMovieDetailsActivity.Companion.EXTRA_TRANSITION_NAME_VIEW_BG
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class FindMoviesActivity : BaseActivity(), FindMoviesContract.View {
+class FindMoviesActivity : BaseActivity() {
 
-    private val presenter by viewModel<FindMoviesContract.Presenter>()
+    private val viewModel by viewModel<FindMoviesViewModel>()
     private val adapter = FindMoviesRecyclerAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_find_movies)
 
-        presenter.attachView(this, lifecycle)
-        presenter.restoreSearchResults()
+        viewModel.attachView(lifecycle)
+        viewModel.restoreSearchResults()
+
+        setupObserve()
 
         recyclerFindMovies.layoutManager = LinearLayoutManager(this)
         recyclerFindMovies.adapter = adapter
 
         buttonNextPage.setOnClickListener {
-            presenter.appendSearchResult()
+            viewModel.appendSearchResult()
         }
 
         buttonSearch.setOnClickListener {
-            presenter.searchMovies(editTextSearch.text.toString())
+            viewModel.searchMovies(editTextSearch.text.toString())
             hideKeyboard()
         }
 
@@ -64,16 +66,16 @@ class FindMoviesActivity : BaseActivity(), FindMoviesContract.View {
         }
     }
 
-    override fun showSearchResults(result: List<MovieListResultObject.SearchMovieResponseResult>) {
-        adapter.setItems(result)
-    }
+    private fun setupObserve() {
+        viewModel.searchResultsLiveData.observe(this, Observer { result ->
+            result ?: return@Observer
 
-    override fun appendSearchResults(result: List<MovieListResultObject.SearchMovieResponseResult>) {
-        adapter.appendItems(result)
-    }
+            adapter.setItems(result)
+        })
+        viewModel.searchResultsErrorLiveData.observe(this, Observer { error ->
+            error ?: return@Observer
 
-    override fun showSearchError() {
-        adapter.clearItems()
-        Toast.makeText(this, "Search error", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Search error", Toast.LENGTH_SHORT).show()
+        })
     }
 }

@@ -14,8 +14,7 @@ class FindMoviesInteractor(
     private val context: Context,
     private val tmDbService: TMDbService,
     private val savedMovieDao: SavedMovieDao
-) : BaseInteractor(), FindMoviesContract.Interactor {
-
+) : BaseInteractor(), IFindMoviesInteractor {
     override suspend fun searchMovies(query: String, page: Int?)
             : Result<MovieListResultObject> = withContext(Dispatchers.IO) {
         processRequest {

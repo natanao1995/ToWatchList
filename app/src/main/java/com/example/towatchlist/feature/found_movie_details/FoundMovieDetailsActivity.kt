@@ -16,7 +16,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.example.towatchlist.Constants
 import jp.wasabeef.glide.transformations.BlurTransformation
 
-class FoundMovieDetailsActivity : BaseActivity(), FoundMovieDetailsContract.View {
+class FoundMovieDetailsActivity : BaseActivity() {
 
     companion object {
         const val EXTRA_MOVIE_ITEM = "extra_movie_item"
@@ -26,7 +26,7 @@ class FoundMovieDetailsActivity : BaseActivity(), FoundMovieDetailsContract.View
         const val EXTRA_TRANSITION_NAME_TEXT_DESCRIPTION = "extra_transition_name_text_description"
     }
 
-    private val presenter by viewModel<FoundMovieDetailsContract.Presenter>()
+    private val viewModel by viewModel<FoundMovieDetailsViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +77,6 @@ class FoundMovieDetailsActivity : BaseActivity(), FoundMovieDetailsContract.View
             })
             .into(imagePoster)
 
-        presenter.attachView(this, lifecycle)
+        viewModel.attachView(lifecycle)
     }
 }

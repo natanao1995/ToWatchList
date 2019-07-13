@@ -7,9 +7,7 @@ data class ResultSuccess<T>(
 ) : Result<T>()
 
 data class ResultError<T>(
-    val data: T? = null,
-    val message: String? = null,
-    val exception: Exception? = null
+    val exception: Exception
 ) : Result<T>()
 
 class ResultLoading<T>(
@@ -23,18 +21,14 @@ inline fun <T, R> Result<T>.mapTo(transform: (T) -> R): Result<R> {
             ResultSuccess(transform(this.data))
         }
         is ResultError -> {
-            var newData: R? = null
-            if (this.data != null) {
-                newData = transform(this.data)
-            }
-            ResultError(data = newData, message = this.message, exception = this.exception)
+            ResultError(this.exception)
         }
         is ResultLoading -> {
             var newData: R? = null
             if (this.data != null) {
                 newData = transform(this.data)
             }
-            ResultLoading(data = newData, progress = this.progress)
+            ResultLoading(newData, this.progress)
         }
     }
 }

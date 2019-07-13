@@ -6,4 +6,4 @@ import com.example.towatchlist.model.remote.TMDbService
 class FoundMovieDetailsInteractor(
     private val tmDbService: TMDbService,
     private val savedMovieDao: SavedMovieDao
-) : FoundMovieDetailsContract.Interactor
+) : IFoundMovieDetailsInteractor
