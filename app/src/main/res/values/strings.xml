@@ -1,3 +1,4 @@
 <resources>
     <string name="appName">To Watch List</string>
+    <string name="tmdbLocale">en-US</string>
 </resources>
