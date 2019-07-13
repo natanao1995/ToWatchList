@@ -11,17 +11,17 @@ open class BaseInteractor {
             val response = call.invoke()
 
             if (response.isSuccessful)
-                Result.Success(response.body()!!)
+                ResultSuccess(response.body()!!)
             else {
                 handleErrorResponse(response.errorBody()?.string())
             }
         } catch (e: Exception) {
-            Result.Error(e)
+            ResultError(exception = e)
         }
     }
 
-    private fun handleErrorResponse(responseString: String?): Result.Error {
+    private fun <T : Any> handleErrorResponse(responseString: String?): ResultError<T> {
         val errorEntity = Gson().fromJson(responseString, ErrorResponseEntity::class.java)
-        return Result.Error(Exception(errorEntity?.statusMessage))
+        return ResultError(exception = Exception(errorEntity?.statusMessage))
     }
 }

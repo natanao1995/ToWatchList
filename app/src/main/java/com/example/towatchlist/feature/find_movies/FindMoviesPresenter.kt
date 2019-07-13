@@ -1,10 +1,12 @@
 package com.example.towatchlist.feature.find_movies
 
-import com.example.towatchlist.architecture.base.Result
+import com.example.towatchlist.architecture.base.ResultError
+import com.example.towatchlist.architecture.base.ResultSuccess
 import com.example.towatchlist.model.remote.entity.MovieListResultObject
 import kotlinx.coroutines.launch
 
-class FindMoviesPresenter(private val findMoviesInteractor: FindMoviesContract.Interactor) : FindMoviesContract.Presenter() {
+class FindMoviesPresenter(private val findMoviesInteractor: FindMoviesContract.Interactor) :
+    FindMoviesContract.Presenter() {
     private var searchQuery: String? = null
     private var searchPages = 1
     private var currentPage = 1
@@ -14,8 +16,8 @@ class FindMoviesPresenter(private val findMoviesInteractor: FindMoviesContract.I
         launch {
             val result = findMoviesInteractor.getWeeklyTrendingMovies()
             when (result) {
-                is Result.Success -> view?.showSearchResults(result.data.results)
-                is Result.Error -> view?.showSearchError()
+                is ResultSuccess -> view?.showSearchResults(result.data.results)
+                is ResultError -> view?.showSearchError()
             }
         }
     }
@@ -31,12 +33,12 @@ class FindMoviesPresenter(private val findMoviesInteractor: FindMoviesContract.I
             resetSearchParameters(query)
 
             val result = findMoviesInteractor.searchMovies(query)
-            if (result is Result.Success) {
+            if (result is ResultSuccess) {
                 searchPages = result.data.totalPages
                 searchResults.clear()
                 searchResults.addAll(result.data.results)
                 view?.showSearchResults(result.data.results)
-            } else if (result is Result.Error) {
+            } else if (result is ResultError) {
                 view?.showSearchError()
             }
         }
@@ -50,10 +52,10 @@ class FindMoviesPresenter(private val findMoviesInteractor: FindMoviesContract.I
                 currentPage++
 
                 val result = findMoviesInteractor.searchMovies(searchQuery, currentPage)
-                if (result is Result.Success) {
+                if (result is ResultSuccess) {
                     searchResults.addAll(result.data.results)
                     view?.appendSearchResults(result.data.results)
-                } else if (result is Result.Error) {
+                } else if (result is ResultError) {
                     view?.showSearchError()
                 }
             }
